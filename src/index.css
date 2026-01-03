@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 60 10% 98%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 66 100% 50%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 20% 10%;
+    --secondary-foreground: 60 10% 98%;
+
+    --muted: 60 5% 92%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 66 100% 50%;
+    --accent-foreground: 220 20% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
+    --ring: 66 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom colors */
+    --lime: 66 100% 50%;
+    --lime-glow: 66 100% 60%;
+    --navy: 220 20% 10%;
+    --navy-light: 220 15% 20%;
+    
+    /* Gradients */
+    --gradient-lime: linear-gradient(135deg, hsl(66 100% 50%), hsl(76 100% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 10%), hsl(220 25% 5%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(220 20% 10% / 0.1);
+    --shadow-lime: 0 0 40px hsl(66 100% 50% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 60 10% 98%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 60 10% 98%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 60 10% 98%;
+
+    --primary: 66 100% 50%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 60 10% 98%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 66 100% 50%;
+    --accent-foreground: 220 20% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 10% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 66 100% 50%;
+
+    /* Custom colors for dark theme */
+    --lime: 66 100% 50%;
+    --lime-glow: 66 100% 60%;
+    --navy: 220 20% 10%;
+    --navy-light: 220 15% 25%;
+    
+    /* Gradients for dark theme */
+    --gradient-lime: linear-gradient(135deg, hsl(66 100% 50%), hsl(76 100% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 6%), hsl(220 25% 3%));
+    
+    /* Shadows for dark theme */
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --shadow-lime: 0 0 40px hsl(66 100% 50% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    cursor: url('/cursor.png') 10 10, auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Optimize scroll performance */
+  section, div[class*="container"] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom cursor for interactive elements */
+  a, button, [role="button"], input, textarea, select, [tabindex]:not([tabindex="-1"]) {
+    cursor: url('/cursor.png') 10 10, pointer;
+  }
+}
+
+@layer components {
+  .section-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-medium uppercase rounded-full;
+    @apply border border-border bg-card text-muted-foreground;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl text-foreground;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    line-height: 1.1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground max-w-2xl;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-full;
+    @apply bg-primary text-primary-foreground;
+    @apply hover:scale-105 hover:shadow-lg transition-all duration-300;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: var(--gradient-lime);
+    box-shadow: var(--shadow-lime);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-full;
+    @apply bg-secondary text-secondary-foreground border border-border;
+    @apply hover:bg-navy-light transition-all duration-300;
+  }
+
+  .card-service {
+    @apply relative overflow-hidden rounded-2xl bg-card border border-border p-6;
+    @apply hover:border-primary/50 hover:shadow-lg transition-all duration-500;
+  }
+
+  .card-service:hover {
+    box-shadow: 0 0 60px hsl(66 100% 50% / 0.15);
+  }
+
+  .marquee {
+    @apply flex gap-12 animate-marquee;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-lime);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-card/80 border border-border rounded-2xl;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 60s linear infinite;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
