@@ -9,7 +9,10 @@ interface DotGridBackgroundProps extends React.ComponentPropsWithoutRef<"div"> {
   spacing?: number;
   logoOpacity?: number;
   backgroundOpacity?: number;
-  animationDuration?: number;
+  backgroundAnimationDuration?: number;
+  logoDelay?: number;
+  logoAnimationDuration?: number;
+  logoPositionDelay?: number;
 }
 
 export function DotGridBackground({
@@ -18,7 +21,10 @@ export function DotGridBackground({
   spacing = 24,
   logoOpacity = 1,
   backgroundOpacity = 0.15,
-  animationDuration = 2000,
+  backgroundAnimationDuration = 2000,
+  logoDelay = 2000,
+  logoAnimationDuration = 3000,
+  logoPositionDelay = 0.6,
   className,
   ...props
 }: DotGridBackgroundProps) {
@@ -84,7 +90,7 @@ export function DotGridBackground({
       svgPathRef.current = svgPath;
 
       // Generate dots
-      const dots: Array<{ x: number; y: number; targetOpacity: number; currentOpacity: number }> = [];
+      const dots: Array<{ x: number; y: number; targetOpacity: number; currentOpacity: number; isLogo: boolean; normalizedY: number }> = [];
       
       // Responsive logo positioning: top center on mobile, right side on desktop
       const isMobile = rect.width < 768; // md breakpoint
@@ -150,7 +156,7 @@ export function DotGridBackground({
 
     const animate = () => {
       const elapsed = Date.now() - startTime;
-      const totalTime = animationDuration + 2000; // Add 2 seconds for logo delay
+      const totalTime = backgroundAnimationDuration + logoDelay + logoAnimationDuration;
       const progress = Math.min(elapsed / totalTime, 1);
       loadProgressRef.current = progress;
       timeRef.current += 0.016; // ~60fps
@@ -164,11 +170,7 @@ export function DotGridBackground({
       const mouse = mouseRef.current;
       const hoverRadius = 80; // Distance from mouse where dots react
 
-      // Animation phases
-      const backgroundAnimationTime = animationDuration; // Background dots animate in first
-      const logoDelay = 2000; // 2 second delay before logo animation
-      const logoAnimationDuration = 3000; // Logo animation takes 3 seconds (slow fade-in)
-
+      // Animation phases - use props instead of hardcoded values
       const elapsedSeconds = elapsed / 1000;
       const logoStartTime = logoDelay / 1000;
       const isLogoPhase = elapsedSeconds > logoStartTime;
@@ -189,7 +191,8 @@ export function DotGridBackground({
             // Bottom appears faster (normalizedY closer to 1 = faster)
             // Top appears slower (normalizedY closer to 0 = slower)
             // Invert normalizedY so bottom (1.0) starts earlier, top (0.0) starts later
-            const positionDelay = (1 - dot.normalizedY) * 0.6; // Top has up to 0.6 delay, bottom has 0 delay
+            // Use logoPositionDelay prop to control uneven loading effect
+            const positionDelay = (1 - dot.normalizedY) * logoPositionDelay;
             const adjustedProgress = Math.max(0, (logoPhaseProgress - positionDelay) / (1 - positionDelay));
             
             // Slow, smooth fade-in with ease-out curve
@@ -197,7 +200,7 @@ export function DotGridBackground({
           }
         } else {
           // Background dots: Animate in immediately
-          const bgProgress = Math.min(elapsed / backgroundAnimationTime, 1);
+          const bgProgress = Math.min(elapsed / backgroundAnimationDuration, 1);
           const dotDelay = (index % 20) / 100;
           const adjustedProgress = Math.max(0, (bgProgress - dotDelay) / (1 - dotDelay));
           baseOpacity = dot.targetOpacity * adjustedProgress;
@@ -231,7 +234,7 @@ export function DotGridBackground({
       }
       resizeObserver.disconnect();
     };
-  }, [dotSize, spacing, logoOpacity, backgroundOpacity, animationDuration, dotRgb, svgPathData]);
+  }, [dotSize, spacing, logoOpacity, backgroundOpacity, backgroundAnimationDuration, logoDelay, logoAnimationDuration, logoPositionDelay, dotRgb, svgPathData]);
 
   return (
     <div

@@ -115,7 +115,7 @@ const Footer = () => {
             © 2024 Vedha. All rights reserved.
           </p>
           <p className="text-sm text-secondary-foreground/60">
-            Made with ❤️ for ambitious brands
+            Made by vedha 
           </p>
         </div>
       </div>
