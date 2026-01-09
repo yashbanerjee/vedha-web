@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { useInView } from '@/hooks/useInView';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const steps = [
