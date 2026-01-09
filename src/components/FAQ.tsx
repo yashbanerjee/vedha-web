@@ -35,8 +35,13 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section ref={ref} className="py-32 md:py-40">
-      <div className="container mx-auto px-6">
+    <section ref={ref} id="faq" className="py-32 md:py-40 min-h-screen flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="container mx-auto px-6"
+      >
         {/* Section Header */}
         <div className="text-center mb-20 md:mb-24">
           <motion.div
@@ -97,11 +102,11 @@ const FAQ = () => {
                 </p>
               </motion.div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+              ))}
+            </div>
+          </motion.div>
+        </section>
+      );
+    };
 
 export default FAQ;

@@ -65,7 +65,7 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-4">
             <motion.a
               href="#contact"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-bold text-primary hover:text-primary/80 transition-colors"
               whileHover={{ y: -2 }}
             >
               Contact
@@ -85,14 +85,6 @@ const Navigation = () => {
                 )}
               </Button>
             </motion.div>
-            <motion.a
-              href="#"
-              className="btn-primary text-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started
-            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -143,11 +135,11 @@ const Navigation = () => {
                 </Button>
               </div>
               <a
-                href="#"
-                className="btn-primary text-sm text-center mt-4"
+                href="#contact"
+                className="text-sm font-bold text-primary hover:text-primary/80 transition-colors text-center mt-4 py-2"
                 onClick={() => setIsOpen(false)}
               >
-                Get Started
+                Contact
               </a>
             </div>
           </motion.div>

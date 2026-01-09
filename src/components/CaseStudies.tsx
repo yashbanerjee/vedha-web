@@ -30,8 +30,13 @@ const CaseStudies = () => {
   const [ref, isInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section ref={ref} id="case-studies" className="py-32 md:py-40">
-      <div className="container mx-auto px-6">
+    <section ref={ref} id="case-studies" className="py-32 md:py-40 min-h-screen flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="container mx-auto px-6"
+      >
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20 md:mb-24 gap-6 md:gap-8">
           <div>
@@ -105,7 +110,7 @@ const CaseStudies = () => {
             </motion.article>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

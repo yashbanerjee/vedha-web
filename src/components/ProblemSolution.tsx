@@ -133,8 +133,14 @@ const ProblemSolution = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <section ref={ref} className="py-32 md:py-40 relative overflow-hidden">
-      {/* Scrolling Problem Text - Row 1 */}
+    <section ref={ref} id="problem-solution" className="py-32 md:py-40 relative overflow-hidden min-h-screen flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full"
+      >
+        {/* Scrolling Problem Text - Row 1 */}
       <div className="mb-20 md:mb-28 overflow-hidden">
         <ScrollingRow
           problems={problemsRow1}
@@ -193,6 +199,7 @@ const ProblemSolution = () => {
           onHover={setHoveredId}
         />
       </div>
+      </motion.div>
     </section>
   );
 };

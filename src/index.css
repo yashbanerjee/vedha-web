@@ -106,6 +106,14 @@
     /* Shadows for dark theme */
     --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
     --shadow-lime: 0 0 40px hsl(66 100% 50% / 0.4);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -116,7 +124,7 @@
 
   html {
     cursor: url('/cursor.png') 10 10, auto;
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
     -webkit-overflow-scrolling: touch;
     background-color: #0a0a0a; /* Dark background during loading */
   }
@@ -131,6 +139,10 @@
     overflow-x: hidden;
     background-color: #0a0a0a; /* Dark background initially, will be overridden by theme */
     transition: background-color 0.3s ease;
+  }
+
+  #root {
+    min-height: 100vh;
   }
 
   /* Optimize scroll performance */
@@ -332,4 +344,15 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground));
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

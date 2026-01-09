@@ -18,8 +18,13 @@ const Technologies = () => {
   const [ref, isInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-32 md:py-40 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section ref={ref} id="technologies" className="py-32 md:py-40 bg-muted/30 min-h-screen flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="container mx-auto px-6"
+      >
         {/* Section Header */}
         <div className="text-center mb-20 md:mb-24">
           <motion.div
@@ -62,7 +67,7 @@ const Technologies = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

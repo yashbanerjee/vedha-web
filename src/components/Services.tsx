@@ -1,119 +1,246 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'framer-motion';
 import { useInView } from '@/hooks/useInView';
-import { Lightbulb, PenTool, Bot, Users, Cog, Zap } from 'lucide-react';
+import { Folder, ChevronRight } from 'lucide-react';
+import { useRef } from 'react';
+import { DotGridBackground } from '@/components/DotGridBackground';
 
-const services = [
+interface ServiceItem {
+  id: number;
+  title: string;
+  description: string;
+  services: string[];
+}
+
+interface MagicBentoBoxProps {
+  service: string;
+  index: number;
+  isInView: boolean;
+  className?: string;
+}
+
+const servicesData: ServiceItem[] = [
   {
-    icon: Lightbulb,
-    title: 'Brand Strategy',
-    description: 'Craft a compelling brand identity that resonates with your audience and sets you apart.',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop',
+    id: 1,
+    title: 'Tech Development',
+    description: 'Elevate your technology: sharp positioning, cohesive solutions, real impact.',
+    services: ['WEB DEVELOPMENT', 'MOBILE APP DEVELOPMENT', 'API INTEGRATION', 'CLOUD INFRASTRUCTURE'],
   },
   {
-    icon: PenTool,
-    title: 'Web Development',
-    description: 'Build stunning, high-performance websites and applications that convert visitors into customers.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
+    id: 2,
+    title: 'Marketing',
+    description: 'Refresh or rebrand your strategy; lift retention with clear flows and data-driven campaigns.',
+    services: ['SEO & CONTENT STRATEGY', 'SOCIAL MEDIA MARKETING', 'PPC ADVERTISING', 'ANALYTICS & REPORTING'],
   },
   {
-    icon: Bot,
-    title: 'Digital Marketing',
-    description: 'Drive targeted traffic and generate qualified leads with data-driven marketing campaigns.',
-    image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=600&h=400&fit=crop',
-  },
-  {
-    icon: Users,
-    title: 'Social Media',
-    description: 'Grow your brand presence and engage your audience across all social platforms.',
-    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop',
-  },
-  {
-    icon: Cog,
-    title: 'SEO & Analytics',
-    description: 'Optimize your online visibility and make data-driven decisions with advanced analytics.',
-    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop',
-  },
-  {
-    icon: Zap,
-    title: 'Content Creation',
-    description: 'Create compelling content that tells your story and drives engagement across all channels.',
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop',
+    id: 3,
+    title: 'Branding and Design',
+    description: 'Launch a revenue-driving brand that captures attention 24/7 — shipped in 14 days or less.',
+    services: ['LOGO & IDENTITY DESIGN', 'BRAND GUIDELINES', 'UI/UX DESIGN', 'GRAPHIC DESIGN'],
   },
 ];
+
+const MagicBentoBox = ({ service, index, isInView, className = '' }: MagicBentoBoxProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{
+        delay: index * 0.08,
+        type: 'spring',
+        stiffness: 200,
+        damping: 20,
+      }}
+      className={`${className} relative group/pill`}
+    >
+      <div className="relative w-full inline-flex items-center gap-2.5 rounded-full bg-card/60 border border-border/50 px-4 py-2 md:px-5 md:py-2.5 group-hover/pill:bg-primary/10 group-hover/pill:border-primary/50 group-hover/pill:shadow-md group-hover/pill:shadow-primary/10 transition-all duration-200 cursor-pointer">
+        <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 group-hover/pill:scale-110 transition-transform duration-200" />
+        <span className="text-sm font-semibold text-foreground uppercase tracking-wider whitespace-nowrap flex-1 group-hover/pill:text-primary transition-colors duration-200">
+          {service}
+        </span>
+        <ChevronRight size={13} className="text-foreground/60 group-hover/pill:text-primary group-hover/pill:translate-x-1 transition-all duration-200 flex-shrink-0" />
+      </div>
+    </motion.div>
+  );
+};
 
 const Services = () => {
   const [ref, isInView] = useInView({ threshold: 0.1 });
 
+  // Dot Grid Background Configuration (without logo)
+  const dotGridConfig = {
+    dotColor: "#e5ff00",
+    dotSize: 3,
+    spacing: 10,
+    logoOpacity: 0, // Hide the logo
+    backgroundOpacity: 0.05,
+    backgroundAnimationDuration: 2000,
+    logoDelay: 1000,
+    logoAnimationDuration: 5000,
+    logoPositionDelay: 0.6,
+  };
+
   return (
-    <section ref={ref} id="services" className="py-32 md:py-40 bg-muted/30">
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
-          <motion.div
+    <section ref={ref} id="services" className="relative py-32 md:py-40 bg-muted/30 overflow-hidden min-h-screen flex flex-col justify-center">
+      {/* Dot Grid Background without logo */}
+      <DotGridBackground
+        dotColor={dotGridConfig.dotColor}
+        dotSize={dotGridConfig.dotSize}
+        spacing={dotGridConfig.spacing}
+        logoOpacity={dotGridConfig.logoOpacity}
+        backgroundOpacity={dotGridConfig.backgroundOpacity}
+        backgroundAnimationDuration={dotGridConfig.backgroundAnimationDuration}
+        logoDelay={dotGridConfig.logoDelay}
+        logoAnimationDuration={dotGridConfig.logoAnimationDuration}
+        logoPositionDelay={dotGridConfig.logoPositionDelay}
+        className="-z-10"
+      />
+      
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="container mx-auto px-6 relative z-10"
+      >
+        {/* Header Section */}
+        <div className="mb-24 md:mb-32">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="section-badge inline-flex mb-6 md:mb-8"
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground"
           >
-            <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-            Our Services
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-title mb-6 md:mb-8"
-          >
-            Full-service solutions
+            What We Do.
           </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="section-subtitle mx-auto"
-          >
-            From strategy to execution, we provide end-to-end tech and marketing 
-            services that help your business stand out and scale.
-          </motion.p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="card-service group cursor-pointer"
-            >
-              <div className="aspect-[4/3] mb-6 rounded-xl overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-primary" />
+        {/* Services - Horizontal Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-stretch">
+          {servicesData.map((service, index) => {
+            const ServiceCard = () => {
+              const cardRef = useRef<HTMLDivElement>(null);
+              const mouseX = useMotionValue(0);
+              const mouseY = useMotionValue(0);
+              const isHovered = useMotionValue(false);
+
+              const mouseXSpring = useSpring(mouseX, { stiffness: 150, damping: 15 });
+              const mouseYSpring = useSpring(mouseY, { stiffness: 150, damping: 15 });
+
+              const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+                if (!cardRef.current) return;
+                const rect = cardRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                mouseX.set(x);
+                mouseY.set(y);
+                isHovered.set(true);
+              };
+
+              const handleMouseLeave = () => {
+                isHovered.set(false);
+              };
+
+              const opacity = useTransform(isHovered, (v) => (v ? 1 : 0));
+              const background = useMotionTemplate`radial-gradient(250px circle at ${mouseXSpring}px ${mouseYSpring}px, rgba(229, 255, 0, 0.015), transparent 60%)`;
+              const borderGlow = useMotionTemplate`radial-gradient(250px circle at ${mouseXSpring}px ${mouseYSpring}px, rgba(229, 255, 0, 0.08), transparent 60%)`;
+              const borderGlowInner = useMotionTemplate`radial-gradient(250px circle at ${mouseXSpring}px ${mouseYSpring}px, rgba(229, 255, 0, 0.12), transparent 70%)`;
+
+              return (
+                <div
+                  ref={cardRef}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  className="rounded-2xl bg-card/40 backdrop-blur-xl border border-border/50 p-8 md:p-10 flex flex-col gap-8 relative overflow-hidden shadow-lg shadow-black/10 h-full group/card transition-all duration-500 group-hover/card:-translate-y-2 group-hover/card:shadow-xl"
+                >
+                  {/* Subtle gradient border glow on hover */}
+                  <div className="pointer-events-none absolute inset-[-1px] rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" style={{
+                    background: 'linear-gradient(135deg, rgba(229, 255, 0, 0.15), rgba(229, 255, 0, 0.05), rgba(229, 255, 0, 0.15))',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    padding: '1px',
+                  }} />
+                  
+                  {/* Mouse-tracking gradient glow background - subtle glass effect */}
+                  <motion.div
+                    className="pointer-events-none absolute inset-0 rounded-2xl"
+                    style={{ background, opacity: useTransform(opacity, (v) => v * 0.4) }}
+                  />
+                  
+                  {/* Mouse-tracking border glow - outer soft glow */}
+                  <motion.div
+                    className="pointer-events-none absolute inset-[-2px] rounded-2xl blur-[1px]"
+                    style={{
+                      background: borderGlow,
+                      opacity: useTransform(opacity, (v) => v * 0.3),
+                    }}
+                  />
+                  
+                  {/* Mouse-tracking border glow - inner border ring */}
+                  <motion.div
+                    className="pointer-events-none absolute inset-[-1px] rounded-2xl"
+                    style={{
+                      background: borderGlowInner,
+                      opacity: useTransform(opacity, (v) => v * 0.5),
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      maskComposite: 'exclude',
+                      padding: '1px',
+                    }}
+                  />
+                  {/* Service Header */}
+                  <div className="relative z-10 flex flex-col gap-5 flex-shrink-0">
+                    <div className="flex-shrink-0">
+                      <Folder className="w-6 h-6 md:w-7 md:h-7 text-foreground transition-colors duration-500 group-hover/card:text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <motion.h3
+                        className="text-xl md:text-2xl font-display font-semibold text-foreground mb-3 whitespace-nowrap overflow-hidden text-ellipsis tracking-tight transition-colors duration-500 group-hover/card:text-primary"
+                      >
+                        {service.title}
+                      </motion.h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed tracking-wide">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Secondary Services Pills */}
+                  <div className="relative z-10 flex-1 min-h-0">
+                    <div className="flex flex-wrap gap-2.5 md:gap-3">
+                      {service.services.map((item, idx) => (
+                        <MagicBentoBox
+                          key={idx}
+                          service={item}
+                          index={idx}
+                          isInView={isInView}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-display font-semibold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              );
+            };
+
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.15 * index,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="flex flex-col h-full group"
+              >
+                <ServiceCard />
+              </motion.div>
+            );
+          })}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

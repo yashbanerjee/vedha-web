@@ -27,7 +27,13 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={ref} id="contact" className="bg-secondary text-secondary-foreground">
+    <footer ref={ref} id="contact" className="min-h-screen flex flex-col justify-center bg-secondary text-secondary-foreground">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full"
+      >
       {/* CTA Section */}
       <div className="border-b border-secondary-foreground/10">
         <div className="container mx-auto px-6 py-24">
@@ -119,6 +125,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      </motion.div>
     </footer>
   );
 };
