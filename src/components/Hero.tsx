@@ -17,11 +17,11 @@ const Hero = () => {
     logoOpacity: 0.8,
     backgroundOpacity: 0.05,
     // Background dots animation duration (in milliseconds)
-    backgroundAnimationDuration: 2000,
+    backgroundAnimationDuration: 1000,
     // Delay before logo animation starts (in milliseconds)
     logoDelay: 1000,
     // Logo animation duration - how long it takes for logo to fully appear (in milliseconds)
-    logoAnimationDuration: 5000,
+    logoAnimationDuration: 1000,
     // Uneven loading effect - controls how much delay between top and bottom of logo (0-1)
     // Higher values = more uneven (top loads much later than bottom)
     // Lower values = more even (top and bottom load closer together)

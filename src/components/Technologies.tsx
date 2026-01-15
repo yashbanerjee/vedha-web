@@ -26,7 +26,7 @@ const Technologies = () => {
         className="container mx-auto px-6"
       >
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-20 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -36,11 +36,11 @@ const Technologies = () => {
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             Technologies
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="section-title"
           >
             Tech stack we use

@@ -39,7 +39,7 @@ const Approach = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [showCTA, setShowCTA] = useState(false);
-  
+
   // Scroll progress through this section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -114,54 +114,51 @@ const Approach = () => {
   }, [scrollYProgress]);
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="approach" 
+    <section
+      ref={sectionRef}
+      id="approach"
       className="relative bg-background min-h-screen snap-start snap-always"
     >
-      {/* Section Header - Sticky at top of viewport, always visible */}
-      <div className="sticky top-0 left-0 right-0 z-[100] pt-24 md:pt-28 pb-8 pointer-events-none bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center relative">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium tracking-wide uppercase rounded-full border border-border/50 text-muted-foreground pointer-events-auto"
-            >
-              <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-              Our Approach
-            </motion.div>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="section-title"
-              style={{ 
-                color: '#ffffff',
-                textShadow: '0 2px 20px rgba(0, 0, 0, 0.9)',
-              }}
-            >
-              Our Process: Precise by Design
-            </motion.h2>
+      {/* Sticky container that holds steps AND header */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+
+        {/* Header - Absolute position so it doesn't affect card centering */}
+        <div className="absolute top-0 left-0 right-0 pt-32 md:pt-40 pb-4 md:pb-8 z-50 pointer-events-none">
+          <div className="container mx-auto px-6">
+            <div className="text-left md:text-center relative">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium tracking-wide uppercase rounded-full border border-border/50 text-muted-foreground bg-background/50 backdrop-blur-sm"
+              >
+                <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                Our Approach
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="section-title"
+                style={{
+                  color: '#ffffff',
+                  textShadow: '0 2px 20px rgba(0, 0, 0, 0.9)',
+                }}
+              >
+                Our Process: Precise by Design
+              </motion.h2>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Sticky container that holds the steps */}
-      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        {/* Spacer for header */}
-        <div className="flex-shrink-0 h-32 md:h-40"></div>
-        
-        {/* Steps Container - Centered in remaining space */}
-        <div className="flex-1 flex items-center justify-center relative">
+        {/* Steps Container - Exactly centered in the screen */}
+        <div className="w-full h-full flex items-center justify-center relative">
           <div className="w-full max-w-3xl mx-auto px-6 relative h-[500px]">
             {/* Large Number Display - Fixed on left, changes based on current step */}
-            <motion.div 
+            <motion.div
               className="absolute left-0 md:left-[-160px] top-1/2 -translate-y-1/2 z-10 pointer-events-none"
               animate={{ opacity: showCTA ? 0 : 1 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <motion.div
                 key={currentStep}
@@ -184,7 +181,7 @@ const Approach = () => {
 
             {steps.map((step, index) => {
               const transforms = stepTransforms[index];
-              
+
               return (
                 <motion.div
                   key={step.id}
@@ -199,7 +196,7 @@ const Approach = () => {
                   <motion.div className="w-full max-w-2xl bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-12 md:p-16 hover:border-primary/50 transition-all duration-500 relative ml-0 md:ml-20 overflow-hidden">
                     {/* Subtle theme color tint in bottom right */}
                     <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-gradient-to-tl from-primary/8 via-primary/4 to-transparent rounded-2xl pointer-events-none" />
-                    
+
                     {/* Hover Glow Effect */}
                     <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
 

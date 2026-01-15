@@ -141,64 +141,65 @@ const ProblemSolution = () => {
         className="w-full"
       >
         {/* Scrolling Problem Text - Row 1 */}
-      <div className="mb-20 md:mb-28 overflow-hidden">
-        <ScrollingRow
-          problems={problemsRow1}
-          direction="forward"
-          rowId="row1"
-          hoveredId={hoveredId}
-          onHover={setHoveredId}
-        />
-      </div>
+        <div className="mb-20 md:mb-28 overflow-hidden">
+          <ScrollingRow
+            problems={problemsRow1}
+            direction="forward"
+            rowId="row1"
+            hoveredId={hoveredId}
+            onHover={setHoveredId}
+          />
+        </div>
 
-      {/* Scrolling Problem Text - Row 2 */}
-      <div className="mb-20 md:mb-28 overflow-hidden">
-        <ScrollingRow
-          problems={problemsRow2}
-          direction="reverse"
-          rowId="row2"
-          hoveredId={hoveredId}
-          onHover={setHoveredId}
-        />
-      </div>
+        {/* Scrolling Problem Text - Row 2 */}
+        <div className="mb-20 md:mb-28 overflow-hidden">
+          <ScrollingRow
+            problems={problemsRow2}
+            direction="reverse"
+            rowId="row2"
+            hoveredId={hoveredId}
+            onHover={setHoveredId}
+          />
+        </div>
 
-      {/* Solution Section - Centered Heading */}
-      <div className="container mx-auto px-6 mb-20 md:mb-28">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          <h2 className="section-title mb-0">
-            Eliminate the bottlenecks
-            <br />
-            <span className="gradient-text">that hold you back</span>
-          </h2>
-        </motion.div>
-      </div>
+        {/* Solution Section */}
+        {/* Section Header */}
+        <div className="text-left md:text-center mb-20 md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-4xl md:mx-auto"
+          >
+            <h2 className="section-title mb-0">
+              Eliminate the bottlenecks
+              <br />
+              <span className="gradient-text">that hold you back</span>
+            </h2>
+          </motion.div>
+        </div>
 
-      {/* Scrolling Problem Text - Row 3 */}
-      <div className="mb-20 md:mb-28 overflow-hidden">
-        <ScrollingRow
-          problems={problemsRow3}
-          direction="forward"
-          rowId="row3"
-          hoveredId={hoveredId}
-          onHover={setHoveredId}
-        />
-      </div>
+        {/* Scrolling Problem Text - Row 3 */}
+        <div className="mb-20 md:mb-28 overflow-hidden">
+          <ScrollingRow
+            problems={problemsRow3}
+            direction="forward"
+            rowId="row3"
+            hoveredId={hoveredId}
+            onHover={setHoveredId}
+          />
+        </div>
 
-      {/* Scrolling Problem Text - Row 4 */}
-      <div className="overflow-hidden">
-        <ScrollingRow
-          problems={problemsRow4}
-          direction="reverse"
-          rowId="row4"
-          hoveredId={hoveredId}
-          onHover={setHoveredId}
-        />
-      </div>
+        {/* Scrolling Problem Text - Row 4 */}
+        <div className="overflow-hidden">
+          <ScrollingRow
+            problems={problemsRow4}
+            direction="reverse"
+            rowId="row4"
+            hoveredId={hoveredId}
+            onHover={setHoveredId}
+          />
+        </div>
       </motion.div>
     </section>
   );

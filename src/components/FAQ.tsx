@@ -43,7 +43,7 @@ const FAQ = () => {
         className="container mx-auto px-6"
       >
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -53,11 +53,11 @@ const FAQ = () => {
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             FAQ
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="section-title"
           >
             Frequently asked questions
@@ -81,13 +81,12 @@ const FAQ = () => {
                 <span className="font-display font-semibold text-lg text-foreground pr-8">
                   {faq.question}
                 </span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
-                  openIndex === index ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-                }`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${openIndex === index ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                  }`}>
                   {openIndex === index ? <Minus size={18} /> : <Plus size={18} />}
                 </div>
               </button>
-              
+
               <motion.div
                 initial={false}
                 animate={{
@@ -102,11 +101,11 @@ const FAQ = () => {
                 </p>
               </motion.div>
             </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      );
-    };
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+};
 
 export default FAQ;

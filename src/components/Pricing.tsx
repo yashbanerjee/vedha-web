@@ -66,7 +66,7 @@ const Pricing = () => {
         className="container mx-auto px-6"
       >
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -90,7 +90,7 @@ const Pricing = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="section-subtitle mx-auto"
+            className="section-subtitle md:mx-auto"
           >
             Choose a plan that fits your business needs and scale as you grow.
           </motion.p>
@@ -104,9 +104,8 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              className={`relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-8 flex flex-col shadow-lg shadow-black/10 ${
-                plan.highlighted ? 'border-primary/80 ring-2 ring-primary/50' : ''
-              }`}
+              className={`relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-8 flex flex-col shadow-lg shadow-black/10 ${plan.highlighted ? 'border-primary/80 ring-2 ring-primary/50' : ''
+                }`}
             >
               {plan.highlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
@@ -129,9 +128,8 @@ const Pricing = () => {
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                      plan.highlighted ? 'bg-primary' : 'bg-primary/20'
-                    }`}>
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${plan.highlighted ? 'bg-primary' : 'bg-primary/20'
+                      }`}>
                       <Check className={`w-3 h-3 ${plan.highlighted ? 'text-primary-foreground' : 'text-primary'}`} />
                     </div>
                     <span className={`text-sm ${plan.highlighted ? 'text-foreground/90' : 'text-muted-foreground'}`}>
@@ -143,11 +141,10 @@ const Pricing = () => {
 
               <motion.a
                 href="#contact"
-                className={`w-full py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
-                  plan.highlighted
+                className={`w-full py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${plan.highlighted
                     ? 'btn-primary'
                     : 'bg-muted hover:bg-muted/80 text-foreground'
-                }`}
+                  }`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

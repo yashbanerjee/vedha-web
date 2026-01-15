@@ -12,7 +12,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       // Wait for both logo fade (0.8s) and background fade (0.3s + 0.5s delay = 0.8s total)
       // Then remove component completely
       setTimeout(onComplete, 800);
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -29,15 +29,15 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ 
-              duration: 0.8, 
+            transition={{
+              duration: 0.8,
               ease: 'easeOut',
             }}
             className="flex flex-col items-center justify-center"
           >
             {/* Logo - Using SVG file from public folder */}
-            <img 
-              src="/vedha-icon.svg" 
+            <img
+              src="/vedha-icon.svg"
               alt="Vedha Logo"
               className="w-[120px] h-auto"
             />
@@ -48,13 +48,13 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ 
-              duration: 0.6, 
+            transition={{
+              duration: 0.6,
               ease: 'easeOut',
               delay: 0.3
             }}
             className="absolute bottom-8 text-center font-display font-light text-white/70"
-            style={{ 
+            style={{
               fontSize: '18px',
               fontFamily: 'Montserrat, sans-serif'
             }}

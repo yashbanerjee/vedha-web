@@ -32,7 +32,7 @@ const Comparison = () => {
         className="container mx-auto px-6"
       >
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-20 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -42,11 +42,11 @@ const Comparison = () => {
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             Why Choose Us
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="section-title"
           >
             The difference is clear
@@ -68,7 +68,7 @@ const Comparison = () => {
               </div>
               <h3 className="font-display font-semibold text-2xl">Sadewa</h3>
             </div>
-            
+
             <ul className="space-y-4">
               {sadewa.map((item, index) => (
                 <motion.li
@@ -100,7 +100,7 @@ const Comparison = () => {
               </div>
               <h3 className="font-display font-semibold text-2xl text-muted-foreground">Other Agencies</h3>
             </div>
-            
+
             <ul className="space-y-4">
               {others.map((item, index) => (
                 <motion.li

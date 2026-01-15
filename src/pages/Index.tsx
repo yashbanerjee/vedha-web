@@ -1,19 +1,24 @@
+import { Suspense, lazy } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import LogoMarquee from '@/components/LogoMarquee';
 import ProblemSolution from '@/components/ProblemSolution';
 import Services from '@/components/Services';
-import CaseStudies from '@/components/CaseStudies';
-import Approach from '@/components/Approach';
-import Testimonials from '@/components/Testimonials';
-import Comparison from '@/components/Comparison';
-import Technologies from '@/components/Technologies';
-import About from '@/components/About';
-import Pricing from '@/components/Pricing';
-import FAQ from '@/components/FAQ';
-import Footer from '@/components/Footer';
 import SectionNavigator from '@/components/SectionNavigator';
+import LoadingScreen from '@/components/LoadingScreen';
 
+// Lazy load below-the-fold components
+const Approach = lazy(() => import('@/components/Approach'));
+const Testimonials = lazy(() => import('@/components/Testimonials'));
+const About = lazy(() => import('@/components/About'));
+const FAQ = lazy(() => import('@/components/FAQ'));
+const Footer = lazy(() => import('@/components/Footer'));
+
+// Commented out components kept for reference but imports removed to avoid unused warnings
+// import CaseStudies from '@/components/CaseStudies';
+// import Comparison from '@/components/Comparison';
+// import Technologies from '@/components/Technologies';
+// import Pricing from '@/components/Pricing';
 
 const Index = () => {
   const sections = [
@@ -40,15 +45,14 @@ const Index = () => {
         <ProblemSolution />
         <LogoMarquee />
         <Services />
-        {/* <CaseStudies /> */}
-        <Approach />
-        <Testimonials />
-        {/* <Comparison /> */}
-        {/* <Technologies /> */}
-        <About />
-        {/* <Pricing /> */}
-        <FAQ />
-        <Footer />
+        
+        <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center">Loading...</div>}>
+          <Approach />
+          <Testimonials />
+          <About />
+          <FAQ />
+          <Footer />
+        </Suspense>
       </main>
       
       <SectionNavigator sections={sections} />

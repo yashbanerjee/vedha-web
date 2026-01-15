@@ -94,7 +94,7 @@ const Services = () => {
         logoPositionDelay={dotGridConfig.logoPositionDelay}
         className="-z-10"
       />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -107,7 +107,7 @@ const Services = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground"
+            className="section-title"
           >
             What We Do.
           </motion.h2>
@@ -160,13 +160,13 @@ const Services = () => {
                     maskComposite: 'exclude',
                     padding: '1px',
                   }} />
-                  
+
                   {/* Mouse-tracking gradient glow background - subtle glass effect */}
                   <motion.div
                     className="pointer-events-none absolute inset-0 rounded-2xl"
                     style={{ background, opacity: useTransform(opacity, (v) => v * 0.4) }}
                   />
-                  
+
                   {/* Mouse-tracking border glow - outer soft glow */}
                   <motion.div
                     className="pointer-events-none absolute inset-[-2px] rounded-2xl blur-[1px]"
@@ -175,7 +175,7 @@ const Services = () => {
                       opacity: useTransform(opacity, (v) => v * 0.3),
                     }}
                   />
-                  
+
                   {/* Mouse-tracking border glow - inner border ring */}
                   <motion.div
                     className="pointer-events-none absolute inset-[-1px] rounded-2xl"
@@ -228,8 +228,8 @@ const Services = () => {
                 key={service.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   delay: 0.15 * index,
                   ease: [0.16, 1, 0.3, 1]
                 }}

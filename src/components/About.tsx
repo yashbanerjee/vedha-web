@@ -41,7 +41,7 @@ const About = () => {
         className="container mx-auto px-6"
       >
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-12 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -51,7 +51,7 @@ const About = () => {
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             About Us
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -60,14 +60,14 @@ const About = () => {
           >
             Meet the team
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="section-subtitle mx-auto"
+            className="section-subtitle md:mx-auto"
           >
-            We're a team of strategists, developers, designers, and marketers passionate about 
+            We're a team of strategists, developers, designers, and marketers passionate about
             helping businesses succeed in the digital landscape.
           </motion.p>
         </div>
@@ -89,7 +89,7 @@ const About = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Social Links */}
                 <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
                   <a href="#" className="w-10 h-10 bg-background rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
@@ -100,18 +100,18 @@ const About = () => {
                   </a>
                 </div>
               </div>
-              
+
               <h3 className="font-display font-semibold text-xl text-foreground mb-1">
                 {member.name}
               </h3>
               <p className="text-primary font-medium text-sm mb-3">{member.role}</p>
               <p className="text-muted-foreground text-sm leading-relaxed">{member.bio}</p>
             </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      );
-    };
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+};
 
 export default About;

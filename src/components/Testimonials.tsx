@@ -1,97 +1,208 @@
-import { motion } from 'framer-motion';
-import { useInView } from '@/hooks/useInView';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef } from 'react';
 import { Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: "Vedha transformed our digital presence completely. Our website traffic increased by 300% and conversions doubled within 6 months.",
+    quote: "Vedha transformed our digital presence completely.",
     author: 'Sarah Chen',
     role: 'CEO',
-    company: 'TechFlow Inc.',
+    company: 'TechFlow',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
   },
   {
-    quote: "The marketing strategy they developed helped us reach our target audience like never before. Best investment we've made.",
+    quote: "Best investment we've ever made.",
     author: 'Michael Torres',
-    role: 'VP of Sales',
+    role: 'VP Sales',
     company: 'GrowthMetrics',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
   },
   {
-    quote: "Working with Vedha was seamless. They built us a world-class product that our customers love. Highly recommended!",
+    quote: "Seamless workflow, incredible results.",
     author: 'Emily Watson',
     role: 'COO',
     company: 'Innovate Labs',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
   },
+  {
+    quote: "They truly understand modern design.",
+    author: 'David Park',
+    role: 'Founder',
+    company: 'Nexus',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+  },
+  {
+    quote: "A game changer for our brand.",
+    author: 'Lisa Wang',
+    role: 'Director',
+    company: 'Studio X',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+  },
 ];
 
+const tweets = [
+  "Amazing work!", "Incredible team", "Fast delivery", "Just wow",
+  "Top quality", "Highly recommended", "Pixel perfect", "Great support",
+  "Outstanding", "Simply the best", "Love it!", "Fantastic job",
+  "Exceeded expectations", "A++ service", "Truly visionary", "Game changer",
+  "World class", "Beautiful design", "Super efficient", "Best decision",
+  "Professional squad", "Mind blown", "10/10 would recommend", "Pure magic",
+  "Innovation leaders"
+];
+
+// Generate deterministic grid positions to avoid overlap
+const generateTweets = () => {
+  return tweets.map((text, i) => {
+    // Desktop Grid: 5 columns x 5 rows
+    const dCols = 5;
+    const dRows = 5;
+    const dCol = i % dCols;
+    const dRow = Math.floor(i / dCols);
+
+    // Desktop Position with jitter
+    const dTop = (dRow * (100 / dRows)) + Math.random() * 10 + 2; // + padding
+    const dLeft = (dCol * (100 / dCols)) + Math.random() * 10 + 2;
+
+    // Mobile Grid: 2 columns x 13 rows (for 25 items)
+    // Using 2 columns to ensure plenty of horizontal space for text
+    const mCols = 2;
+    // We only care about the distribution, the hidden ones just leave gaps which is fine
+    const mCol = i % mCols;
+    const mRow = Math.floor(i / mCols);
+
+    // Mobile Position with more horizontal variation (jitter)
+    // Column 0: 0-40%, Column 1: 50-90%
+    const mLeft = (mCol * 50) + Math.random() * 30 + 5;
+    const mTop = (mRow * (100 / 13)) + Math.random() * 4 + 1;
+
+    return {
+      text,
+      // Store formatted percentage strings for CSS variables
+      dTop: `${dTop}%`,
+      dLeft: `${dLeft}%`,
+      mTop: `${mTop}%`,
+      mLeft: `${mLeft}%`,
+      delay: Math.random() * 5,
+      duration: Math.random() * 10 + 10,
+    };
+  });
+};
+
+const floatingTweets = generateTweets();
+
 const Testimonials = () => {
-  const [ref, isInView] = useInView({ threshold: 0.1 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollXProgress } = useScroll({ container: containerRef });
 
   return (
-    <section ref={ref} id="testimonials" className="py-32 md:py-40 bg-muted/30 min-h-screen flex flex-col justify-center">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="container mx-auto px-6"
-      >
+    <section id="testimonials" className="relative py-20 md:py-40 bg-background min-h-[80vh] md:min-h-screen flex flex-col justify-center overflow-hidden">
+
+      {/* Floating Background Tweets - Reduced on mobile */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+        {floatingTweets.map((tweet, i) => (
+          <motion.div
+            key={i}
+            className={`absolute top-[var(--m-top)] left-[var(--m-left)] md:top-[var(--d-top)] md:left-[var(--d-left)] text-foreground/40 text-[10px] md:text-sm font-medium whitespace-nowrap px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] ${i % 3 === 0 ? 'hidden md:block' : 'block'}`}
+            style={{
+              '--m-top': tweet.mTop,
+              '--m-left': tweet.mLeft,
+              '--d-top': tweet.dTop,
+              '--d-left': tweet.dLeft,
+            } as React.CSSProperties}
+            animate={{
+              y: [0, -15, 0],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: tweet.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: tweet.delay,
+            }}
+          >
+            {tweet.text}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-20 md:mb-24">
+        <div className="text-left md:text-center mb-12 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="section-badge inline-flex mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 mb-4 md:mb-6 text-xs md:text-sm font-medium tracking-wide uppercase rounded-full border border-border/50 text-muted-foreground bg-background/50 backdrop-blur-sm"
           >
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             Testimonials
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-title"
+            className="section-title text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground"
           >
-            What our clients say
+            People who enjoyed our company
           </motion.h2>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.author}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="bg-card border border-border rounded-2xl p-8 md:p-10 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-            >
-              <Quote className="w-10 h-10 text-primary/30 mb-6" />
-              
-              <p className="text-foreground text-lg leading-relaxed mb-8">
-                "{testimonial.quote}"
-              </p>
-              
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.author}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}, {testimonial.company}
-                  </p>
+        {/* Horizontal Scroll Marquee */}
+        <div className="relative w-full overflow-hidden mask-linear-fade">
+          {/* Gradient Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
+
+          <div className="flex gap-4 md:gap-8 animate-marquee hover:pause whitespace-nowrap py-6 md:py-10">
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+              <motion.div
+                key={`${testimonial.author}-${index}`}
+                className="w-[280px] md:w-[400px] flex-shrink-0 relative group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Glass Card */}
+                <div className="relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 overflow-hidden hover:border-primary/30 transition-colors duration-500">
+
+                  {/* Moving Gradient Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <motion.div
+                    className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
+                    animate={{ x: ['-200%', '200%'] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  />
+
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col h-full items-start text-left whitespace-normal">
+                    <Quote className="w-6 h-6 md:w-8 md:h-8 text-primary/50 mb-4 md:mb-6" />
+
+                    <p className="text-base md:text-xl text-foreground font-medium mb-6 md:mb-8 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+
+                    <div className="mt-auto flex items-center gap-3 md:gap-4">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-white/10">
+                        <img
+                          src={testimonial.avatar}
+                          alt={testimonial.author}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground text-sm">{testimonial.author}</h4>
+                        <p className="text-xs text-muted-foreground">{testimonial.role}, {testimonial.company}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

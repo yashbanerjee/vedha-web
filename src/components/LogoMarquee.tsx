@@ -76,19 +76,19 @@ const logos = [
   },
 ];
 
-const AnimatedGradientText = ({ 
-  text, 
-  showCursor, 
+const AnimatedGradientText = ({
+  text,
+  showCursor,
   isComplete,
   fullText
-}: { 
-  text: string; 
+}: {
+  text: string;
   showCursor: boolean;
   isComplete: boolean;
   fullText: string;
 }) => {
   // Ensure the container has consistent width by using the full text length
-  const displayText = text.length < fullText.length 
+  const displayText = text.length < fullText.length
     ? text.padEnd(fullText.length, '\u00A0') // Use non-breaking space to maintain width
     : text;
 
@@ -149,7 +149,7 @@ const LogoMarquee = () => {
     let currentIndex = 0;
     let iteration = 0;
     const iterationsPerChar = 4; // Number of random char changes before locking
-    const totalDuration = 4000; // 5 seconds total
+    const totalDuration = 1000; // 5 seconds total
     const intervalTime = totalDuration / (fullText.length * iterationsPerChar); // Calculate timing to complete in 5 seconds
 
     const decryptInterval = setInterval(() => {
@@ -212,7 +212,7 @@ const LogoMarquee = () => {
             fullText={fullText}
           />
         </div>
-        
+
         {/* Responsive Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 md:gap-x-10 gap-y-12 md:gap-y-16">
           {logos.map((logo, index) => (
@@ -225,20 +225,20 @@ const LogoMarquee = () => {
               <LogoItem name={logo.name} icon={logo.icon} />
             </motion.div>
           ))}
-          
+
           {/* Empty Slot - Add Your Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 * logos.length }}
-            whileHover={{ 
+            whileHover={{
               y: -4,
               scale: 1.05,
             }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center gap-3 text-muted-foreground/60 hover:text-foreground transition-colors group cursor-pointer"
           >
-            <motion.div 
+            <motion.div
               className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-foreground/40 group-hover:text-foreground/80 transition-colors border-2 border-dashed border-foreground/20 group-hover:border-primary/50 rounded-lg"
               whileHover={{ rotate: 90 }}
               transition={{ duration: 0.3 }}
@@ -256,18 +256,18 @@ const LogoMarquee = () => {
 const LogoItem = ({ name, icon }: { name: string; icon: React.ReactNode }) => (
   <motion.div
     className="flex items-center gap-3 text-muted-foreground/60 hover:text-foreground transition-colors min-w-fit group cursor-pointer"
-    whileHover={{ 
+    whileHover={{
       y: -4,
       scale: 1.05,
     }}
     whileTap={{ scale: 0.98 }}
-    transition={{ 
+    transition={{
       type: "spring",
       stiffness: 400,
       damping: 17
     }}
   >
-    <motion.div 
+    <motion.div
       className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-foreground/40 group-hover:text-foreground/80 transition-colors"
       whileHover={{ rotate: [0, -5, 5, -5, 0] }}
       transition={{ duration: 0.5 }}
