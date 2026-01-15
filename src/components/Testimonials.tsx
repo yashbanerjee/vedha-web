@@ -48,14 +48,14 @@ const Testimonials = () => {
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             Testimonials
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="section-title"
           >
-            What our clients say
+            People we’ve helped reach their next level.
           </motion.h2>
         </div>
 
@@ -70,24 +70,24 @@ const Testimonials = () => {
               className="bg-card border border-border rounded-2xl p-8 md:p-10 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
             >
               <Quote className="w-10 h-10 text-primary/30 mb-6" />
-              
+
               <p className="text-foreground text-lg leading-relaxed mb-8">
                 "{testimonial.quote}"
               </p>
-              
-              <div className="flex items-center gap-4">
+
+              {/* <div className="flex items-center gap-4">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.author}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                  <p className="font-semibold text-foreground">{testimonial.author}</p>
+                  <p className="font-semibold text-foreground">{testimonial.author}</p> 
                   <p className="text-sm text-muted-foreground">
                     {testimonial.role}, {testimonial.company}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </motion.div>
           ))}
         </div>

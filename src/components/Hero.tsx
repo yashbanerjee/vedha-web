@@ -8,7 +8,7 @@ const Hero = () => {
   // ========================================
   // ANIMATION CONTROLS - Adjust these values to control timing
   // ========================================
-  
+
   // Dot Grid Background Animations
   const dotGridConfig = {
     dotColor: "#e5ff00",
@@ -77,36 +77,36 @@ const Hero = () => {
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: textAnimations.heading.duration, 
-              delay: textAnimations.heading.delay 
+            transition={{
+              duration: textAnimations.heading.duration,
+              delay: textAnimations.heading.delay
             }}
             className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground mb-6 md:mb-12 text-balance"
           >
-            We Build A Presence That{' '}
-            <span className="gradient-text">Commands Attention.</span>
+            Your Technology {' '}
+            <span className="gradient-text">Partner</span>
           </motion.h1>
 
           {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: textAnimations.description.duration, 
-              delay: textAnimations.description.delay 
+            transition={{
+              duration: textAnimations.description.duration,
+              delay: textAnimations.description.delay
             }}
             className="text-base md:text-xl text-muted-foreground max-w-2xl mb-8 md:mb-12"
           >
-            Visibility is easy. Authority is engineered.
+            Thinking Like You, Building For You
           </motion.p>
 
           {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: textAnimations.ctaButton.duration, 
-              delay: textAnimations.ctaButton.delay 
+            transition={{
+              duration: textAnimations.ctaButton.duration,
+              delay: textAnimations.ctaButton.delay
             }}
             className="flex items-start justify-start"
           >
@@ -116,7 +116,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              Book a strategy call
+              Let’s Talk Strategy
               <ArrowRight size={18} />
             </motion.a>
           </motion.div>

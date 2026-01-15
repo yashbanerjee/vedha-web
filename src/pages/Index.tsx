@@ -45,12 +45,12 @@ const Index = () => {
         <Testimonials />
         {/* <Comparison /> */}
         {/* <Technologies /> */}
-        <About />
+        {/* <About /> */}
         {/* <Pricing /> */}
         <FAQ />
         <Footer />
       </main>
-      
+
       <SectionNavigator sections={sections} />
     </div>
   );

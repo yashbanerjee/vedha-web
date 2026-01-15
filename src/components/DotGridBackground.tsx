@@ -78,11 +78,13 @@ export function DotGridBackground({
 
     const resize = () => {
       const rect = container.getBoundingClientRect();
+      const width = Math.floor(rect.width);
+      const height = Math.floor(rect.height);
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
       ctx.scale(dpr, dpr);
 
       // Create SVG path for precise logo detection
@@ -91,12 +93,12 @@ export function DotGridBackground({
 
       // Generate dots
       const dots: Array<{ x: number; y: number; targetOpacity: number; currentOpacity: number; isLogo: boolean; normalizedY: number }> = [];
-      
+
       // Responsive logo positioning: top center on mobile, right side on desktop
       const isMobile = rect.width < 768; // md breakpoint
       const logoX = isMobile ? rect.width / 2 : rect.width * 0.75;
       const centerY = isMobile ? rect.height * 0.25 : rect.height / 2; // Top quarter on mobile
-      
+
       // SVG viewBox is 80x70, we'll scale it to fit
       // Smaller on mobile, larger on desktop
       const logoSizeMultiplier = isMobile ? 0.45 : 0.65;
@@ -106,8 +108,8 @@ export function DotGridBackground({
 
       // Create a temporary canvas to check if points are inside the path
       const tempCanvas = document.createElement("canvas");
-      tempCanvas.width = rect.width;
-      tempCanvas.height = rect.height;
+      tempCanvas.width = width;
+      tempCanvas.height = height;
       const tempCtx = tempCanvas.getContext("2d");
       if (!tempCtx) return;
 
@@ -121,18 +123,18 @@ export function DotGridBackground({
       tempCtx.restore();
 
       // Get image data to check pixel colors
-      const imageData = tempCtx.getImageData(0, 0, rect.width, rect.height);
+      const imageData = tempCtx.getImageData(0, 0, width, height);
       const data = imageData.data;
 
-      for (let x = spacing / 2; x < rect.width; x += spacing) {
-        for (let y = spacing / 2; y < rect.height; y += spacing) {
+      for (let x = spacing / 2; x < width; x += spacing) {
+        for (let y = spacing / 2; y < height; y += spacing) {
           // Check if this pixel is inside the logo (white pixel in temp canvas)
-          const pixelIndex = (Math.floor(y) * rect.width + Math.floor(x)) * 4;
+          const pixelIndex = (Math.floor(y) * width + Math.floor(x)) * 4;
           const isLogoDot = data[pixelIndex] > 128; // White pixel means inside logo
-          
+
           // Calculate normalized Y position for stagger effect (0 = top, 1 = bottom)
           const normalizedY = y / rect.height;
-          
+
           dots.push({
             x,
             y,
@@ -182,7 +184,7 @@ export function DotGridBackground({
         const dy = dot.y - mouse.y;
         const distToMouse = Math.sqrt(dx * dx + dy * dy);
         const mouseInfluence = Math.max(0, 1 - distToMouse / hoverRadius);
-        
+
         let baseOpacity = 0;
 
         if (dot.isLogo) {
@@ -194,7 +196,7 @@ export function DotGridBackground({
             // Use logoPositionDelay prop to control uneven loading effect
             const positionDelay = (1 - dot.normalizedY) * logoPositionDelay;
             const adjustedProgress = Math.max(0, (logoPhaseProgress - positionDelay) / (1 - positionDelay));
-            
+
             // Slow, smooth fade-in with ease-out curve
             baseOpacity = dot.targetOpacity * Math.pow(Math.max(0, adjustedProgress), 0.7);
           }
@@ -209,7 +211,7 @@ export function DotGridBackground({
         // Mouse hover effect - increase opacity when near mouse
         const hoverBoost = mouseInfluence * 0.4; // Increase opacity by up to 40% when hovered
         const finalOpacity = Math.min(1, baseOpacity + hoverBoost);
-        
+
         // Smooth interpolation
         dot.currentOpacity += (finalOpacity - dot.currentOpacity) * 0.15;
 
