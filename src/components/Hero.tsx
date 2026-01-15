@@ -83,8 +83,8 @@ const Hero = () => {
             }}
             className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground mb-6 md:mb-12 text-balance"
           >
-            We Build A Presence That{' '}
-            <span className="gradient-text">Commands Attention.</span>
+            Your Partner In{' '}
+            <span className="gradient-text">Technology</span>
           </motion.h1>
 
           {/* Description */}
@@ -97,7 +97,7 @@ const Hero = () => {
             }}
             className="text-base md:text-xl text-muted-foreground max-w-2xl mb-8 md:mb-12"
           >
-            Visibility is easy. Authority is engineered.
+            Thinking like you, Building for you
           </motion.p>
 
           {/* CTA Button */}
