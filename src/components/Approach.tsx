@@ -6,31 +6,36 @@ const steps = [
   {
     id: 'step-1',
     number: '01',
-    title: 'Discover',
+    title: 'We put on your shoes and run a mile',
+    bgTitle: 'Discover',
     description: 'It all starts with understanding your goals. We dive deep into your business, audience, and market to uncover opportunities.',
   },
   {
     id: 'step-2',
     number: '02',
-    title: 'Strategize',
+    title: 'We design strategy, never wing it',
+    bgTitle: 'Strategize',
     description: 'We craft a tailored roadmap combining tech and marketing for maximum impact. Every decision is data-driven.',
   },
   {
     id: 'step-3',
     number: '03',
-    title: 'Validate',
+    title: 'Before we hit go, we make sure it flies',
+    bgTitle: 'Validate',
     description: 'We test and validate our strategy to ensure it aligns with your business objectives and market needs.',
   },
   {
     id: 'step-4',
     number: '04',
-    title: 'Develop',
+    title: 'Strategy is only as good as its execution',
+    bgTitle: 'Develop',
     description: 'Our team brings the strategy to life with pixel-perfect design and flawless development.',
   },
   {
     id: 'step-5',
     number: '05',
-    title: 'Scale Up',
+    title: 'What works, we crank it up',
+    bgTitle: 'Scale Up',
     description: 'We continuously optimize and expand your digital presence as your business grows.',
   },
 ];
@@ -123,7 +128,7 @@ const Approach = () => {
       <div className="sticky top-0 h-screen overflow-hidden">
 
         {/* Header - Absolute position so it doesn't affect card centering */}
-        <div className="absolute top-0 left-0 right-0 pt-32 md:pt-40 pb-4 md:pb-8 z-50 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 pt-20 md:pt-24 pb-4 md:pb-8 z-50 pointer-events-none">
           <div className="container mx-auto px-6">
             <div className="text-left md:text-center relative">
               {/* <motion.div
@@ -152,10 +157,10 @@ const Approach = () => {
 
         {/* Steps Container - Exactly centered in the screen */}
         <div className="w-full h-full flex items-center justify-center relative">
-          <div className="w-full max-w-3xl mx-auto px-6 relative h-[500px]">
-            {/* Large Number Display - Fixed on left, changes based on current step */}
+          <div className="w-full max-w-3xl mx-auto px-6 relative h-[500px] mt-16 md:mt-20">
+            {/* Large Faded Title Display - Fixed in background, changes based on current step */}
             <motion.div
-              className="absolute left-0 md:left-[-160px] top-1/2 -translate-y-1/2 z-10 pointer-events-none"
+              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none"
               animate={{ opacity: showCTA ? 0 : 1 }}
             >
               <motion.div
@@ -163,9 +168,9 @@ const Approach = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="text-[280px] md:text-[320px] font-display font-bold leading-none"
+                className="text-[120px] sm:text-[140px] md:text-[180px] lg:text-[220px] xl:text-[260px] font-display font-bold leading-none whitespace-nowrap"
                 style={{
-                  background: 'linear-gradient(180deg, rgba(229, 255, 0, 0.08) 0%, rgba(229, 255, 0, 0.02) 100%)',
+                  background: 'linear-gradient(180deg, rgba(229, 255, 0, 0.06) 0%, rgba(229, 255, 0, 0.015) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -173,7 +178,7 @@ const Approach = () => {
                   textShadow: 'none',
                 }}
               >
-                {steps[currentStep]?.number || '01'}
+                {steps[currentStep]?.bgTitle || 'Discover'}
               </motion.div>
             </motion.div>
 
@@ -191,7 +196,16 @@ const Approach = () => {
                     zIndex: index === currentStep ? 30 : index < currentStep ? 0 : 20,
                   }}
                 >
-                  <motion.div className="w-full max-w-2xl bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-12 md:p-16 hover:border-primary/50 transition-all duration-500 relative ml-0 md:ml-20 overflow-hidden">
+                  <motion.div className="w-full max-w-6xl bg-card/20 backdrop-blur-md border border-border/50 rounded-2xl p-12 md:p-16 hover:border-primary/50 transition-all duration-500 relative overflow-hidden">
+                    {/* Animated glassmorphic gradient overlay */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(229, 255, 0, 0.08) 0%, rgba(229, 255, 0, 0.02) 50%, transparent 100%)',
+                        opacity: transforms.opacity,
+                      }}
+                    />
+
                     {/* Subtle theme color tint in bottom right */}
                     <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-gradient-to-tl from-primary/8 via-primary/4 to-transparent rounded-2xl pointer-events-none" />
 
@@ -200,7 +214,7 @@ const Approach = () => {
 
                     {/* Content */}
                     <div className="space-y-5 relative z-10">
-                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground tracking-tight">
+                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground tracking-tight leading-tight">
                         {step.title}
                       </h3>
                       <p className="text-base md:text-lg text-muted-foreground leading-relaxed tracking-wide">
