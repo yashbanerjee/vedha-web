@@ -126,7 +126,7 @@ const Approach = () => {
         <div className="absolute top-0 left-0 right-0 pt-32 md:pt-40 pb-4 md:pb-8 z-50 pointer-events-none">
           <div className="container mx-auto px-6">
             <div className="text-left md:text-center relative">
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -134,19 +134,17 @@ const Approach = () => {
               >
                 <span className="w-1.5 h-1.5 bg-primary rounded-full" />
                 Our Approach
-              </motion.div>
+              </motion.div> */}
 
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="section-title"
-                style={{
-                  color: '#ffffff',
-                  textShadow: '0 2px 20px rgba(0, 0, 0, 0.9)',
-                }}
               >
-                Our Process: Precise by Design
+                We guide your journey from start to scale
+                <br />
+                <span className="gradient-text">with strategy, tech, and a touch of clever.</span>
               </motion.h2>
             </div>
           </div>

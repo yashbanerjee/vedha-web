@@ -162,19 +162,18 @@ const ProblemSolution = () => {
           />
         </div>
 
-        {/* Solution Section */}
-        {/* Section Header */}
-        <div className="text-left md:text-center mb-20 md:mb-24">
+        {/* Solution Section - Centered Heading */}
+        <div className="container mx-auto px-6 mb-20 md:mb-28">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl md:mx-auto"
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-4xl mx-auto"
           >
             <h2 className="section-title mb-0">
-              Eliminate the bottlenecks
+              We know where brands get stuck.
               <br />
-              <span className="gradient-text">that hold you back</span>
+              <span className="gradient-text">And how to move forward.</span>
             </h2>
           </motion.div>
         </div>
