@@ -97,38 +97,62 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="relative py-20 md:py-40 bg-background min-h-[80vh] md:min-h-screen flex flex-col justify-center overflow-hidden">
 
-      {/* Floating Background Tweets - Reduced on mobile */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-        {floatingTweets.map((tweet, i) => (
-          <motion.div
-            key={i}
-            className={`absolute top-[var(--m-top)] left-[var(--m-left)] md:top-[var(--d-top)] md:left-[var(--d-left)] text-foreground/40 text-[10px] md:text-sm font-medium whitespace-nowrap px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] ${i % 3 === 0 ? 'hidden md:block' : 'block'}`}
-            style={{
-              '--m-top': tweet.mTop,
-              '--m-left': tweet.mLeft,
-              '--d-top': tweet.dTop,
-              '--d-left': tweet.dLeft,
-            } as React.CSSProperties}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: tweet.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: tweet.delay,
-            }}
-          >
-            {tweet.text}
-          </motion.div>
-        ))}
+      {/* Breathing Background Effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Subtle animated gradient orbs */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.03] blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(229, 255, 0, 0.4) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.03, 0.05, 0.03],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full opacity-[0.02] blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(229, 255, 0, 0.3) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.02, 0.04, 0.02],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-[400px] h-[400px] rounded-full opacity-[0.025] blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(229, 255, 0, 0.25) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.025, 0.04, 0.025],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-left md:text-center mb-12 md:mb-20">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -137,16 +161,18 @@ const Testimonials = () => {
           >
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             Testimonials
-          </motion.div>
+          </motion.div> */}
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-title text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-foreground"
+            className="section-title"
           >
-            People who enjoyed our company
+            Brands we've helped reach their next level
+            <br />
+            <span className="gradient-text">here's what they have to say.</span>
           </motion.h2>
         </div>
 

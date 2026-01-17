@@ -17,14 +17,22 @@ const Navigation = () => {
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border"
-    >
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 md:px-6">
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="w-full max-w-[1400px] rounded-2xl"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          border: '1px solid rgba(255, 255, 255, 0.18)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+        }}
+      >
+        <div className="mx-auto px-6">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <motion.a
             href="#"
@@ -102,7 +110,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden py-4 border-t border-border"
+            className="md:hidden py-4 mt-4 border-t border-white/10"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -115,7 +123,7 @@ const Navigation = () => {
                   {link.label}
                 </a>
               ))}
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
                 <span className="text-sm font-medium text-muted-foreground">Theme</span>
                 <Button
                   variant="ghost"
@@ -144,8 +152,9 @@ const Navigation = () => {
             </div>
           </motion.div>
         )}
-      </div>
-    </motion.nav>
+        </div>
+      </motion.nav>
+    </div>
   );
 };
 

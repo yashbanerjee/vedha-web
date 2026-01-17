@@ -44,7 +44,7 @@ const FAQ = () => {
       >
         {/* Section Header */}
         <div className="text-left md:text-center mb-16 md:mb-24">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -52,7 +52,7 @@ const FAQ = () => {
           >
             <span className="w-1.5 h-1.5 bg-primary rounded-full" />
             FAQ
-          </motion.div>
+          </motion.div> */}
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}

@@ -63,33 +63,78 @@ const Approach = () => {
   const step0Y = useTransform(step0Progress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
   const step0Opacity = useTransform(step0Progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const step0Scale = useTransform(step0Progress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const step0BgOpacity = useTransform(step0Progress, [0, 0.2, 0.8, 1], [0.03, 0.08, 0.08, 0.03]);
+  const step0BorderOpacity = useTransform(step0Progress, [0, 0.2, 0.8, 1], [0.08, 0.18, 0.18, 0.08]);
+  const step0BackgroundColor = useTransform(step0BgOpacity, (opacity) => `rgba(255, 255, 255, ${opacity})`);
+  const step0Border = useTransform(step0BorderOpacity, (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`);
+  const step0BackdropFilter = useTransform(step0Progress, (progress) => {
+    const blur = progress < 0.2 ? 8 + (progress / 0.2) * 12 : progress > 0.8 ? 20 - ((progress - 0.8) / 0.2) * 12 : 20;
+    const saturate = progress < 0.2 ? 120 + (progress / 0.2) * 60 : progress > 0.8 ? 180 - ((progress - 0.8) / 0.2) * 60 : 180;
+    return `blur(${blur}px) saturate(${saturate}%)`;
+  });
 
   const step1Y = useTransform(step1Progress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
   const step1Opacity = useTransform(step1Progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const step1Scale = useTransform(step1Progress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const step1BgOpacity = useTransform(step1Progress, [0, 0.2, 0.8, 1], [0.03, 0.08, 0.08, 0.03]);
+  const step1BorderOpacity = useTransform(step1Progress, [0, 0.2, 0.8, 1], [0.08, 0.18, 0.18, 0.08]);
+  const step1BackgroundColor = useTransform(step1BgOpacity, (opacity) => `rgba(255, 255, 255, ${opacity})`);
+  const step1Border = useTransform(step1BorderOpacity, (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`);
+  const step1BackdropFilter = useTransform(step1Progress, (progress) => {
+    const blur = progress < 0.2 ? 8 + (progress / 0.2) * 12 : progress > 0.8 ? 20 - ((progress - 0.8) / 0.2) * 12 : 20;
+    const saturate = progress < 0.2 ? 120 + (progress / 0.2) * 60 : progress > 0.8 ? 180 - ((progress - 0.8) / 0.2) * 60 : 180;
+    return `blur(${blur}px) saturate(${saturate}%)`;
+  });
 
   const step2Y = useTransform(step2Progress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
   const step2Opacity = useTransform(step2Progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const step2Scale = useTransform(step2Progress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const step2BgOpacity = useTransform(step2Progress, [0, 0.2, 0.8, 1], [0.03, 0.08, 0.08, 0.03]);
+  const step2BorderOpacity = useTransform(step2Progress, [0, 0.2, 0.8, 1], [0.08, 0.18, 0.18, 0.08]);
+  const step2BackgroundColor = useTransform(step2BgOpacity, (opacity) => `rgba(255, 255, 255, ${opacity})`);
+  const step2Border = useTransform(step2BorderOpacity, (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`);
+  const step2BackdropFilter = useTransform(step2Progress, (progress) => {
+    const blur = progress < 0.2 ? 8 + (progress / 0.2) * 12 : progress > 0.8 ? 20 - ((progress - 0.8) / 0.2) * 12 : 20;
+    const saturate = progress < 0.2 ? 120 + (progress / 0.2) * 60 : progress > 0.8 ? 180 - ((progress - 0.8) / 0.2) * 60 : 180;
+    return `blur(${blur}px) saturate(${saturate}%)`;
+  });
 
   const step3Y = useTransform(step3Progress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
   const step3Opacity = useTransform(step3Progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const step3Scale = useTransform(step3Progress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const step3BgOpacity = useTransform(step3Progress, [0, 0.2, 0.8, 1], [0.03, 0.08, 0.08, 0.03]);
+  const step3BorderOpacity = useTransform(step3Progress, [0, 0.2, 0.8, 1], [0.08, 0.18, 0.18, 0.08]);
+  const step3BackgroundColor = useTransform(step3BgOpacity, (opacity) => `rgba(255, 255, 255, ${opacity})`);
+  const step3Border = useTransform(step3BorderOpacity, (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`);
+  const step3BackdropFilter = useTransform(step3Progress, (progress) => {
+    const blur = progress < 0.2 ? 8 + (progress / 0.2) * 12 : progress > 0.8 ? 20 - ((progress - 0.8) / 0.2) * 12 : 20;
+    const saturate = progress < 0.2 ? 120 + (progress / 0.2) * 60 : progress > 0.8 ? 180 - ((progress - 0.8) / 0.2) * 60 : 180;
+    return `blur(${blur}px) saturate(${saturate}%)`;
+  });
 
   const step4Y = useTransform(step4Progress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
   const step4Opacity = useTransform(step4Progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const step4Scale = useTransform(step4Progress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const step4BgOpacity = useTransform(step4Progress, [0, 0.2, 0.8, 1], [0.03, 0.08, 0.08, 0.03]);
+  const step4BorderOpacity = useTransform(step4Progress, [0, 0.2, 0.8, 1], [0.08, 0.18, 0.18, 0.08]);
+  const step4BackgroundColor = useTransform(step4BgOpacity, (opacity) => `rgba(255, 255, 255, ${opacity})`);
+  const step4Border = useTransform(step4BorderOpacity, (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`);
+  const step4BackdropFilter = useTransform(step4Progress, (progress) => {
+    const blur = progress < 0.2 ? 8 + (progress / 0.2) * 12 : progress > 0.8 ? 20 - ((progress - 0.8) / 0.2) * 12 : 20;
+    const saturate = progress < 0.2 ? 120 + (progress / 0.2) * 60 : progress > 0.8 ? 180 - ((progress - 0.8) / 0.2) * 60 : 180;
+    return `blur(${blur}px) saturate(${saturate}%)`;
+  });
 
   const ctaY = useTransform(ctaProgress, [0, 0.3, 1], [100, 0, 0]);
   const ctaOpacity = useTransform(ctaProgress, [0, 0.2, 1], [0, 1, 1]);
   const ctaScale = useTransform(ctaProgress, [0, 0.3, 1], [0.95, 1, 1]);
 
   const stepTransforms = [
-    { y: step0Y, opacity: step0Opacity, scale: step0Scale },
-    { y: step1Y, opacity: step1Opacity, scale: step1Scale },
-    { y: step2Y, opacity: step2Opacity, scale: step2Scale },
-    { y: step3Y, opacity: step3Opacity, scale: step3Scale },
-    { y: step4Y, opacity: step4Opacity, scale: step4Scale },
+    { y: step0Y, opacity: step0Opacity, scale: step0Scale, backgroundColor: step0BackgroundColor, border: step0Border, backdropFilter: step0BackdropFilter },
+    { y: step1Y, opacity: step1Opacity, scale: step1Scale, backgroundColor: step1BackgroundColor, border: step1Border, backdropFilter: step1BackdropFilter },
+    { y: step2Y, opacity: step2Opacity, scale: step2Scale, backgroundColor: step2BackgroundColor, border: step2Border, backdropFilter: step2BackdropFilter },
+    { y: step3Y, opacity: step3Opacity, scale: step3Scale, backgroundColor: step3BackgroundColor, border: step3Border, backdropFilter: step3BackdropFilter },
+    { y: step4Y, opacity: step4Opacity, scale: step4Scale, backgroundColor: step4BackgroundColor, border: step4Border, backdropFilter: step4BackdropFilter },
   ];
 
   // Update current step based on scroll progress
@@ -128,9 +173,9 @@ const Approach = () => {
       <div className="sticky top-0 h-screen overflow-hidden">
 
         {/* Header - Absolute position so it doesn't affect card centering */}
-        <div className="absolute top-0 left-0 right-0 pt-20 md:pt-24 pb-4 md:pb-8 z-50 pointer-events-none">
-          <div className="container mx-auto px-6">
-            <div className="text-left md:text-center relative">
+        <div className="absolute top-0 left-0 right-0 pt-44 md:pt-40 pb-6 md:pb-8 z-50 pointer-events-none">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-left md:text-center relative mb-12 md:mb-0">
               {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -145,10 +190,11 @@ const Approach = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="section-title"
+                className="section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight md:leading-normal"
               >
                 We guide your journey from start to scale
-                <br />
+                <br className="hidden sm:block" />
+                <span className="block sm:inline"> </span>
                 <span className="gradient-text">with strategy, tech, and a touch of clever.</span>
               </motion.h2>
             </div>
@@ -156,8 +202,8 @@ const Approach = () => {
         </div>
 
         {/* Steps Container - Exactly centered in the screen */}
-        <div className="w-full h-full flex items-center justify-center relative">
-          <div className="w-full max-w-3xl mx-auto px-6 relative h-[500px] mt-16 md:mt-20">
+        <div className="w-full h-full flex items-center justify-center relative pt-8 md:pt-0">
+          <div className="w-full max-w-3xl mx-auto px-4 md:px-6 relative h-[400px] sm:h-[450px] md:h-[500px] mt-8 md:mt-16 lg:mt-20">
             {/* Large Faded Title Display - Fixed in background, changes based on current step */}
             <motion.div
               className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none"
@@ -168,7 +214,7 @@ const Approach = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="text-[120px] sm:text-[140px] md:text-[180px] lg:text-[220px] xl:text-[260px] font-display font-bold leading-none whitespace-nowrap"
+                className="text-[100px] sm:text-[120px] md:text-[140px] lg:text-[180px] xl:text-[220px] 2xl:text-[260px] font-display font-bold leading-none whitespace-nowrap opacity-40 md:opacity-100"
                 style={{
                   background: 'linear-gradient(180deg, rgba(229, 255, 0, 0.06) 0%, rgba(229, 255, 0, 0.015) 100%)',
                   WebkitBackgroundClip: 'text',
@@ -196,7 +242,16 @@ const Approach = () => {
                     zIndex: index === currentStep ? 30 : index < currentStep ? 0 : 20,
                   }}
                 >
-                  <motion.div className="w-full max-w-6xl bg-card/20 backdrop-blur-md border border-border/50 rounded-2xl p-12 md:p-16 hover:border-primary/50 transition-all duration-500 relative overflow-hidden">
+                  <motion.div 
+                    className="w-full max-w-6xl rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16 hover:border-primary/50 transition-all duration-500 relative overflow-hidden mx-2 md:mx-0"
+                    style={{
+                      backgroundColor: transforms.backgroundColor,
+                      backdropFilter: transforms.backdropFilter,
+                      WebkitBackdropFilter: transforms.backdropFilter,
+                      border: transforms.border,
+                      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+                    }}
+                  >
                     {/* Animated glassmorphic gradient overlay */}
                     <motion.div
                       className="absolute inset-0 rounded-2xl pointer-events-none"
@@ -213,11 +268,11 @@ const Approach = () => {
                     <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
 
                     {/* Content */}
-                    <div className="space-y-5 relative z-10">
-                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground tracking-tight leading-tight">
+                    <div className="space-y-3 sm:space-y-4 md:space-y-5 relative z-10">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display font-semibold text-foreground tracking-tight leading-tight">
                         {step.title}
                       </h3>
-                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed tracking-wide">
+                      <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed tracking-wide">
                         {step.description}
                       </p>
                     </div>
@@ -236,15 +291,15 @@ const Approach = () => {
                 zIndex: showCTA ? 40 : 0,
               }}
             >
-              <div className="text-center mb-8">
+              <div className="text-center mb-6 md:mb-8 px-4">
                 <motion.a
                   href="#contact"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground rounded-full text-lg font-semibold hover:bg-primary/90 transition-colors duration-300 shadow-lg shadow-primary/20"
+                  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-primary text-primary-foreground rounded-full text-sm sm:text-base md:text-lg font-semibold hover:bg-primary/90 transition-colors duration-300 shadow-lg shadow-primary/20"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Let's meet for a coffee
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </motion.a>
               </div>
 
